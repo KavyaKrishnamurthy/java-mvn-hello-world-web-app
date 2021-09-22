@@ -1,29 +1,22 @@
-pipeline {    
-   agent any 
-   stages {
-  
- 
-   stage('checkout') {
-         
-        	steps {
-                 sh 'rm -rf *'
-         		sh 'git clone https://github.com/KavyaKrishnamurthy/java-mvn-hello-world-web-app'
-  
-          }
-    
+pipeline {
+  agent { label 'slave_n1' } 
+    stages {
+        stage('Directory') {
+            steps {
+               // sh 'cd /home/slave_n1/workspace/Pipelinejob/java-mvn-hello-world-web-app/'
+               sh 'cd ${WORKSPACE}'
+            }
+        }
+        stage('Compile') {
+            steps {
+                sh 'mvn compile'
+            }
+        }
+        stage('Package') {
+            steps {
+                sh 'mvn package'
+            }
+        }
     }
- 
-stage('build') {
-         
-        	steps {
-            
-            cd /home/slave_n1/workspace/Pipelinejob/java-mvn-hello-world-web-app
-            sh 'pwd'
-            sh 'ls'
- sh 'mvn package'
-}
 }
 
-   }
-
-}
