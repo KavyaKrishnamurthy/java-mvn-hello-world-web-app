@@ -16,7 +16,7 @@ pipeline {
 stage('build') {
          
         	steps {
-  sh 'ls'
+  sh 'cd java-mvn-hello-world-web-app'
  sh 'mvn package'
 }
 }
