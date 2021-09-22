@@ -17,7 +17,7 @@ stage('build') {
          
         	steps {
             
-            sh "cd /home/slave_n1/workspace/Pipelinejob/java-mvn-hello-world-web-app"
+            cd /home/slave_n1/workspace/Pipelinejob/java-mvn-hello-world-web-app
             sh 'pwd'
             sh 'ls'
  sh 'mvn package'
