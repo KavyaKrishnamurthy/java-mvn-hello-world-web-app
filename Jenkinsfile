@@ -6,7 +6,7 @@ pipeline {
    stage('checkout') {
          
         	steps {
-      
+                 sh 'rm -rf *'
          		sh 'git clone https://github.com/KavyaKrishnamurthy/java-mvn-hello-world-web-app'
   
           }
