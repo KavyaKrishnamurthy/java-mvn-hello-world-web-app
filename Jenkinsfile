@@ -24,7 +24,7 @@ pipeline {
         }
    stage('Run') {
             steps {
-                sh 'cd /opt/tomcat/bin/./startup.sh'
+                sh '/opt/tomcat/bin/./startup.sh'
             }
         }
     }
