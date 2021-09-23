@@ -24,7 +24,7 @@ pipeline {
         }
    stage('Run') {
             steps {
-                sh 'cd /opt/tomcat/bin/'
+                sh 'cd /opt/apache-tomcat-10.0.11/bin/'
               sh './startup.sh'
             }
         }
