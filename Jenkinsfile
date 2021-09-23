@@ -19,7 +19,7 @@ pipeline {
         }
       stage('Deploy') {
             steps {
-                sh 'cp /home/slave_n1/workspace/tomcatinstall/target/mvn-hello-world.war /opt/tomcat/webapps'
+                sh 'cp /home/slave_n1/workspace/tomcatinstall/target/mvn-hello-world.war /opt/apache-tomcat-10.0.11/webapps'
             }
         }
    stage('Run') {
