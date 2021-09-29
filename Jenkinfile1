@@ -1,33 +1,27 @@
 pipeline {
-  agent {
-  // { label 'slave_n1' } 
+      agent { label 'slave2' } 
     stages {
-        stage('Clean code') {
+        stage('cloneproject') {
             steps {
-               sh 'git clone https://github.com/KavyaKrishnamurthy/java-mvn-hello-world-web-app'
+                sh 'cd /home/slave2/'
+				sh 'git clone https://github.com/puranikamath/java-mvn-hello-world-web-app
+                sh 'pwd'
+                sh 'cd /home/slave2/wokspace/DockermavenCICD'
             }
         }
-        stage('Build') {
+        stage('Buildprocess') {
             steps {
-                sh 'sudo docker build -t jenkins_volume1:2.60.1 .'
+                sh 'cd /home/slave2/wokspace/DockermavenCICD'
+                sh 'sudo docker build -t mavenbuild /'home/slave2/wokspace/DockermavenCICD'
+                sh 'sudo docker tag mavenbuild:latest 035389679427.dkr.ecr.us-east-2.amazonaws.com/puranikamath:latest'
+                sh 'sudo docker push 035389679427.dkr.ecr.us-east-2.amazonaws.com/puranikamath:latest'
             }
         }
-        stage('Run') {
+        stage('deployprocess') {
             steps {
-                sh 'sudo docker run -it jenkins_volume1:2.60.1'
-            }
-        }
-      stage('Deploy') {
-            steps {
-                sh 'sudo docker volume create voljenk'
-                sh 'sudo docker run -p 5555:8080 -p 20000:50000 -v voljenk:/var/jenkins_home jenkins:2.60.1'
-            }
-        }
-   stage('Publish') {
-            steps {
-                sh 'sudo docker tag jenkins_volume1:2.60.1 kavyakota/jnkvol:2.60.4'
-                sh 'sudo docker login -u kavyakota -p Malini20### -h jenkins_volume1
-                sh 'sudo docker push kavyakota/jnkvol:2.60.4'
+                sh 'cd /home/slave2/wokspace/DockermavenCICD'
+                sh 'sudo run -d -p 8083:8080 mavenbuild:latest'
+            
             }
         }
     }
