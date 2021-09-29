@@ -1,5 +1,6 @@
 pipeline {
-  agent { label 'slave_n1' } 
+  agent any
+  // { label 'slave_n1' } 
     stages {
         stage('Clean code') {
             steps {
