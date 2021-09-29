@@ -4,7 +4,7 @@ pipeline {
         stage('cloneproject') {
             steps {
                 sh 'cd /home/slave2/'
-				sh 'git clone https://github.com/puranikamath/java-mvn-hello-world-web-app
+				sh 'git clone https://github.com/KavyaKrishnamurthy/java-mvn-hello-world-web-app'
                 sh 'pwd'
                 sh 'cd /home/slave2/wokspace/DockermavenCICD'
             }
@@ -13,8 +13,8 @@ pipeline {
             steps {
                 sh 'cd /home/slave2/wokspace/DockermavenCICD'
                 sh 'sudo docker build -t mavenbuild /'home/slave2/wokspace/DockermavenCICD'
-                sh 'sudo docker tag mavenbuild:latest 035389679427.dkr.ecr.us-east-2.amazonaws.com/puranikamath:latest'
-                sh 'sudo docker push 035389679427.dkr.ecr.us-east-2.amazonaws.com/puranikamath:latest'
+                sh 'sudo docker tag '
+                sh 'sudo docker push '
             }
         }
         stage('deployprocess') {
