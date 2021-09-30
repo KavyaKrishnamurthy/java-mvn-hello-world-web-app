@@ -21,7 +21,7 @@ pipeline {
       steps{
         sh 'docker login -u kavyakota -p Malini20###'
         sh 'docker pull kavyakota/mvnimage:2.0'
-        sh 'docker run -d -p 5500:8080 kavyakota/mvnimage:2.0'
+        sh 'docker run -d -p 5550:8080 kavyakota/mvnimage:2.0'
       }
     }
    
