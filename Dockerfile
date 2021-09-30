@@ -1,4 +1,4 @@
-FROM maven:3.6.2 -openjdk-8-slim as mavenbuild
+FROM maven:3.6.2-openjdk-8 as mavenbuild
 WORKDIR /dir
 COPY . .
 RUN mvn package
