@@ -17,6 +17,7 @@ pipeline {
     }
    
   stage ('deploy'){
+   agent { label 'slave2' } 
       steps{
         sh 'docker login -u kavyakota -p Malini20###'
         sh 'docker pull kavyakota/mvnimage:2.0'
