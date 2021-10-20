@@ -1,0 +1,59 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: myjenkins
+  labels:
+    app: myapp
+spec:
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxSurge: 2
+      maxUnavailable: 0 
+  replicas: 4
+  selector:
+    matchLabels:
+      app: myapp
+  template:
+    metadata:
+      name: jenkindeploy
+      labels: 
+        app: myapp
+    spec:
+      nodeSelector:
+        environment: QA
+      tolerations: 
+        - key: "colour"
+          operator: "Equal"
+          value: "pink"
+          effect: "NoSchedule"
+      containers:
+        - name: jenkins
+          image: jenkins:2.60.2
+          volumeMounts:
+            - name: jenkinsdirectory
+              mountPath: /var/jenkins_home
+      volumes:
+        - name: jenkinsdirectory
+          persistentVolumeClaim:
+            claimName: myclaimjenkins
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: myjenkins
+spec:
+  selector:
+    app: myapp
+  ports:
+    - name: port1
+      protocol: TCP
+      port: 30002
+      targetPort: 8080
+    - name: port2
+      protocol: TCP
+      port: 34000
+      targetPort: 50000
+  externalIPs:
+    - 172.31.20.120
